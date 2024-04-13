@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import userRoutes from "./routes/user";
+import userRoutes from './routes/user';
 
 declare const process: {
   env: {
@@ -11,10 +11,12 @@ declare const process: {
 
 dotenv.config();
 const app = express();
+app.use(express.json());
+
 const PORT = 3000;
 
 mongoose
-  .connect(process.env.DATABASE_URL || "", {
+  .connect(process.env.DATABASE_URL || '', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } as mongoose.ConnectOptions)
