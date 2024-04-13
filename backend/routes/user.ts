@@ -1,6 +1,8 @@
 import express, { Router, Request, Response } from 'express';
+import { allUsers } from '../controllers/user';
 
-export const router = express.Router();
-router.get('/all', async (req: Request, res: Response) => {
-  res.send('Hello World');
-});
+const router = Router();
+router.get('/all', allUsers);
+
+export default router;
+
