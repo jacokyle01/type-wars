@@ -1,4 +1,4 @@
 # Development
 
-`npm run dev` \
+`npm run dev`
 - Builds and runs Typescript on change
