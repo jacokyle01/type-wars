@@ -3,9 +3,8 @@ import { User } from '../models/user';
 import mongoose from 'mongoose';
 
 export const allUsers = async (req: Request, res: Response) => {
-  // res.json({});
   try {
-    const users = await User.find();
+    const users = await User.find({}, { _id: 0, __v: 0});
     res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -15,11 +14,14 @@ export const allUsers = async (req: Request, res: Response) => {
 
 export const addUser = async (req: Request, res: Response) => {
   console.log(req.body);
-  const { id, name } = req.body;
+  const { username, forename, surname, email } = req.body;
   const user = new User({
     _id: new mongoose.Types.ObjectId(),
-    id,
-    name,
+    username,
+    forename,
+    surname,
+    email,
+    createdAt: Date.now()
   });
 
   await user
