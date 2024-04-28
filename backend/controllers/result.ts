@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { Result } from '../models/result';
 import mongoose from 'mongoose';
+import { dummyResult } from '../util/dummy';
+import { PostedResult } from '../types/types';
 
 export const addResult = async (req: Request, res: Response) => {
   console.log(req.body);
@@ -29,3 +31,14 @@ export const getResult = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+export const fillResults = async (req: Request, res: Response) => {
+  const count = req.params['count'];
+  const results: PostedResult[] = [];
+  for (let i = 0; i < parseInt(count || "0"); i++) {
+    results.push(dummyResult());
+  }
+
+  await Result.insertMany(results);
+  res.json(`Inserted ${count} instances of dummy data`)
+}
