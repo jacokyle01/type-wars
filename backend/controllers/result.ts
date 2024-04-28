@@ -52,3 +52,14 @@ export const allResults = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+export const getResultsFromUser = async (req: Request, res: Response) => {
+  const uid = req.params['uid'];
+  try {
+    const results = await Result.find({uid}, { _id: 0, __v: 0 });
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching results:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};

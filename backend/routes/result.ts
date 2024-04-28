@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import { addResult, allResults, fillResults, getResult } from '../controllers/result'
+import { addResult, allResults, fillResults, getResult, getResultsFromUser } from '../controllers/result'
 
 const router = Router();
 //all users
@@ -13,5 +13,8 @@ router.post('/fill/:count', fillResults)
 
 //all results 
 router.get('', allResults);
+
+//results from a certain user
+router.get('/from/:uid', getResultsFromUser);
 
 export default router;
