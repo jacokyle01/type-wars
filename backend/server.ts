@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user';
 import resultRoutes from './routes/result';
+import leaderboardRoutes from './routes/leaderboard';
+
 
 
 declare const process: {
@@ -39,4 +41,6 @@ app.listen(PORT, () => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/result', resultRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+
 
