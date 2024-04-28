@@ -11,7 +11,6 @@ export interface IResult {
 }
 
 const resultSchema = new Schema<IResult>({
-  id: { type: Number, required: true },
   uid: { type: Number, required: true },
   wpm: { type: Number, required: true },
   timeControl: { type: Number, required: true },

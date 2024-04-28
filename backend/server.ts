@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import userRoutes from './routes/user';
+import resultRoutes from './routes/result';
+
 
 declare const process: {
   env: {
@@ -36,3 +38,5 @@ app.listen(PORT, () => {
 });
 
 app.use('/api/user', userRoutes);
+app.use('/api/result', resultRoutes);
+
