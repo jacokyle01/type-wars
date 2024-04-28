@@ -42,3 +42,13 @@ export const fillResults = async (req: Request, res: Response) => {
   await Result.insertMany(results);
   res.json(`Inserted ${count} instances of dummy data`)
 }
+
+export const allResults = async (req: Request, res: Response) => {
+  try {
+    const results = await Result.find({}, { _id: 0, __v: 0 });
+    res.json(results);
+  } catch (error) {
+    console.error('Error fetching results:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};

@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import { addResult, fillResults, getResult } from '../controllers/result'
+import { addResult, allResults, fillResults, getResult } from '../controllers/result'
 
 const router = Router();
 //all users
@@ -10,5 +10,8 @@ router.get('/:id', getResult);
 
 //fill results with :count instances of dummy data 
 router.post('/fill/:count', fillResults)
+
+//all results 
+router.get('', allResults);
 
 export default router;
