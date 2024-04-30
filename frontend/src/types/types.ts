@@ -1,0 +1,1 @@
+export type View = "login" | "play" | "leaderboard"
