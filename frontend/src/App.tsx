@@ -1,11 +1,5 @@
-function App() {
-  return (
-    <>
-      <a href="https://vitejs.dev" target="_blank">
-        Hello world
-      </a>
-    </>
-  );
-}
+const App = () => {
+  return <></>;
+};
 
 export default App;
