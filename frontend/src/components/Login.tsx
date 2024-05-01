@@ -22,7 +22,7 @@ export const Login: React.FC<FormProps> = ({setName ,setView}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={userInput} onChange={handleChange} type="text" placeholder="Enter username" />
+      <input value={userInput} onChange={handleChange} type="text" placeholder="Enter username"/>
       <button>Enter</button>
     </form>
   );
