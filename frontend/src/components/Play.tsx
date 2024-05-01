@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { Mode } from '../types/types';
 
-interface PlayProps {
+interface Name {
   name: string;
+  UID: number;
+}
+
+interface PlayProps {
+  name: Name;
 }
 
 let interval: number = -1;
@@ -46,7 +51,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
 
   return (
     <>
-      <h1>Hello {name}</h1>
+      <h1>Hello {name.name}</h1>
       {(() => {
         switch (mode) {
           case 'notStarted':

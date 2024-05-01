@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { View } from '../types/types';
 
+interface Name {
+    name: string;
+    UID: number;
+  }
+
 interface FormProps {
-  setName: (name: object) => void
+  setName: (name: Name) => void
   setView: (view: View) => void
 }
 
@@ -35,25 +40,34 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
         "UID": 0
     }
 
-    const response = await fetch("http://localhost:3001/user", {
-			method: "POST",
-			headers: { "content-type": "application/json" },
-			body: JSON.stringify({
-				username: userName,
-				forename: firstName,
-				surname: lastName,
-				email: email
-        }),
-    })
-    
-    const user = await response.json();
+    console.log(userName);
+    console.log(firstName);
+    console.log(lastName);
+    console.log(email);
 
-    data.name = userName;
-    data.UID = user.id;
+    try {
+    const response = await fetch("http://localhost:3000/api/user", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                    username: userName,
+                    forename: firstName,
+                    surname: lastName,
+                    email: email
+            }),
+        })
+        
+        const user = await response.json();
 
-    setName(data);
+        data.name = userName;
+        data.UID = user.id;
 
-    setView('play');
+        setName(data);
+
+        setView('play');
+    } catch (error) {
+        console.error("Error:", error)
+    } 
   };
 
   return (

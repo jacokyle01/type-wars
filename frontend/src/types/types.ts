@@ -1,1 +1,1 @@
-export type View = "login" | "play" | "leaderboard"
+export type View = "login" | "register" | "play" | "leaderboard"
