@@ -1,6 +1,7 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { Mode, TypingResult } from '../types/types';
 import { allowedKeys } from '../util/constants';
+import { wordGen } from '../util/word';
 
 interface PlayProps {
   name: string;
@@ -10,6 +11,7 @@ let interval: number = 0;
 
 export const Play: React.FC<PlayProps> = ({ name }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
+  const [wordLimit, setWordLimit] = useState(100);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
   const inputRef = useRef<HTMLDivElement>(null);
   const [remainingTime, setRemainingTime] = useState(10); //how long time is left. TODO should start at the timeControl
@@ -30,7 +32,8 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   const handleStart = () => {
     setMode('inProgress'); //updates view
     //TODO make util method that does this
-    setTargetString('Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, optio!');
+    // setTargetString('Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, optio!');
+    setTargetString(wordGen(wordLimit));
     // setStarted(true);
     // setEnded(false);
     // setInput(quote.quote);
