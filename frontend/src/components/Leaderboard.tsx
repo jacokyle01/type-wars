@@ -19,10 +19,6 @@ export const Leaderboard = () => {
     };
   }, [wordQuery, queryLimit]);
 
-  const isSelected = (wc: number) => {
-    return wc == wordQuery ? 'currentWordLimit' : 'wordLimit';
-  };
-
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQueryLimit(parseInt(event.target.value));
   };
