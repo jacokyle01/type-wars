@@ -1,17 +1,12 @@
 import { useState } from 'react';
-import { View } from '../types/types';
-
-interface Name {
-    name: string;
-    UID: number;
-  }
+import { User, View } from '../types/types';
 
 interface FormProps {
-  setName: (name: Name) => void
+  setUser: (user: User) => void
   setView: (view: View) => void
 }
 
-export const Register: React.FC<FormProps> = ({setName ,setView}) => {
+export const Register: React.FC<FormProps> = ({setUser, setView}) => {
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -37,7 +32,7 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
     e.preventDefault();
     const data = {
         "name": "",
-        "UID": 0
+        "id": 0
     }
 
     console.log(userName);
@@ -60,9 +55,9 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
         const user = await response.json();
 
         data.name = userName;
-        data.UID = user.id;
+        data.id = user.id;
 
-        setName(data);
+        setUser(data);
 
         setView('play');
     } catch (error) {

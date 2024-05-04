@@ -1,20 +1,15 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { Mode, TypingResult } from '../types/types';
+import { Mode, TypingResult, User } from '../types/types';
 import { allowedKeys } from '../util/constants';
 import { wordGen } from '../util/word';
 
-interface Name {
-  name: string;
-  UID: number;
-}
-
 interface PlayProps {
-  name: Name;
+  user: User;
 }
 
 let interval: number = 0;
 
-export const Play: React.FC<PlayProps> = ({ name }) => {
+export const Play: React.FC<PlayProps> = ({ user }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
   const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
@@ -93,7 +88,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
 
   return (
     <>
-      <h1>Hello {name.name}</h1>
+      <h1>Hello {user.name}</h1>
       {(() => {
         switch (mode) {
           case 'notStarted':
