@@ -52,8 +52,6 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
     setWordsTyped(0);
     setSpentTime(0);
     setCompletionIndex(0);
-
-
     setMode('finished');
   };
 
