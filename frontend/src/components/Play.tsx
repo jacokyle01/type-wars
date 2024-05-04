@@ -3,8 +3,13 @@ import { Mode, TypingResult } from '../types/types';
 import { allowedKeys } from '../util/constants';
 import { wordGen } from '../util/word';
 
-interface PlayProps {
+interface Name {
   name: string;
+  UID: number;
+}
+
+interface PlayProps {
+  name: Name;
 }
 
 let interval: number = 0;
@@ -88,7 +93,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
 
   return (
     <>
-      <h1>Hello {name}</h1>
+      <h1>Hello {name.name}</h1>
       {(() => {
         switch (mode) {
           case 'notStarted':
