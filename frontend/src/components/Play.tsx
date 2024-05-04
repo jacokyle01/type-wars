@@ -1,5 +1,6 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { Mode } from '../types/types';
+import { Mode, TypingResult } from '../types/types';
+import { allowedKeys } from '../util/constants';
 
 interface PlayProps {
   name: string;
@@ -9,6 +10,7 @@ let interval: number = 0;
 
 export const Play: React.FC<PlayProps> = ({ name }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
+  const [typingResult, setTypingResult] = useState<TypingResult>('null');
   const inputRef = useRef<HTMLDivElement>(null);
   const [remainingTime, setRemainingTime] = useState(10); //how long time is left. TODO should start at the timeControl
   useEffect(() => {
@@ -54,11 +56,13 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
 
   const handleKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
-    console.log('hello');
     const { key } = e;
-    setLastPressedKey(key);
     if (key === targetString.charAt(completionIndex)) {
+      setTypingResult('correct');
       setCompletionIndex(completionIndex + 1);
+      setLastPressedKey(key);
+    } else if (allowedKeys.includes(key)) {
+      setTypingResult('incorrect');
     }
   };
 
@@ -75,8 +79,8 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
                 <h1>Time remaining: {remainingTime}</h1>
                 <div id="test-wrap">
                   <h3>{targetString}</h3>
-                  <div tabIndex={-1} onKeyDown={handleKeyDown} ref={inputRef}>
-                    {targetString.slice(0, completionIndex)}
+                  <div className={typingResult} tabIndex={-1} onKeyDown={handleKeyDown} ref={inputRef}>
+                    {targetString.slice(0, completionIndex) + "|"}
                   </div>
                   <h3>Last pressed key: {lastPressedKey}</h3>
                 </div>
