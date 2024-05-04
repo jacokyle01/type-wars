@@ -123,9 +123,10 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
                 <h1>Time spent: {spentTime}</h1>
                 <h1>Your wpm: {getWpm()}</h1>
                 <div id="test-wrap">
-                  <h3>{targetString}</h3>
+                  {/* <h3>{targetString}</h3> */}
                   <div className={typingResult} tabIndex={-1} onKeyDown={handleKeyDown} ref={inputRef}>
                     {targetString.slice(0, completionIndex) + '|'}
+                    <span style={{ color: 'gray' }}>{targetString.slice(completionIndex)}</span>
                   </div>
                   <h3>Last pressed key: {lastPressedKey}</h3>
                 </div>
