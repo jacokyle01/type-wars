@@ -7,7 +7,7 @@ import { Profile } from './components/Profile';
 import { Login } from './components/Login';
 
 const App = () => {
-  const [view, setView] = useState<View>('leaderboard');
+  const [view, setView] = useState<View>('register');
   const [user, setUser] = useState<User>({ name: '', id: 0 });
 
   switch (view) {
