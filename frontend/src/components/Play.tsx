@@ -11,7 +11,7 @@ let interval: number = 0;
 
 export const Play: React.FC<PlayProps> = ({ name }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
-  const [wordLimit, setWordLimit] = useState(100);
+  const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
   const [wordsTyped, setWordsTyped] = useState(0);
 
@@ -43,7 +43,10 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   //TODO wpm
   //TODO uses a constant!
   const getWpm = () => {
-    return wordsTyped * 60 / (10 - remainingTime);
+    if (remainingTime == 10) {
+      return 0;
+    }
+    return (wordsTyped * 60) / (10 - remainingTime);
   };
 
   const handleEnd = () => {
@@ -67,7 +70,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
     e.preventDefault();
     const { key } = e;
     if (key === targetString.charAt(completionIndex)) {
-      if (key == " ") {
+      if (key == ' ') {
         setWordsTyped(wordsTyped + 1);
       }
       setTypingResult('correct');
@@ -78,13 +81,28 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
     }
   };
 
+  const isSelected = (wc: number) => {
+    return wc == wordLimit ? "currentWordLimit" : "wordLimit";
+  }
+
   return (
     <>
       <h1>Hello {name}</h1>
       {(() => {
         switch (mode) {
           case 'notStarted':
-            return <button onClick={() => handleStart()}>Click to play</button>;
+            return (
+              <>
+                <div id="timeSelect">
+                  <div className={isSelected(25)} onClick={() => setWordLimit(25)}>25</div>
+                  <div className={isSelected(50)} onClick={() => setWordLimit(50)}>50</div>
+                  <div className={isSelected(100)} onClick={() => setWordLimit(100)}>100</div>
+                  <div className={isSelected(150)} onClick={() => setWordLimit(150)}>150</div>
+                  <div className={isSelected(200)} onClick={() => setWordLimit(200)}>200</div>
+                </div>
+                <button onClick={() => handleStart()}>Click to play</button>
+              </>
+            );
           case 'inProgress': //could be a separate component
             return (
               <>

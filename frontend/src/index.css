@@ -9,3 +9,7 @@
 *:focus {
   outline: none;
 }
+
+.currentWordLimit {
+  border: 1px solid black;
+}
