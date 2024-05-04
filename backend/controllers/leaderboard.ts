@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { Result } from '../models/result';
 
 export const getLeaderboard = async (req: Request, res: Response) => {
-  const { timeControl, limit } = req.query;
-  const query = timeControl ? { timeControl } : {};
+  const { words, limit } = req.query;
+  const query = words ? { words } : {};
   const projection = { _id: 0, __v: 0 };
 
   const options = {};

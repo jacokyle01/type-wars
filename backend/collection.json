@@ -83,7 +83,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"uid\": 13,\n    \"wpm\": 150,\n    \"timeControl\": 30\n}",
+              "raw": "{\n    \"uid\": 13,\n    \"wpm\": 150,\n    \"words\": 25\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -159,13 +159,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:3000/api/leaderboard?timeControl=30&limit=20",
+              "raw": "localhost:3000/api/leaderboard?words=25&limit=20",
               "host": ["localhost"],
               "port": "3000",
               "path": ["api", "leaderboard"],
               "query": [
                 {
-                  "key": "timeControl",
+                  "key": "words",
                   "value": "30"
                 },
                 {
