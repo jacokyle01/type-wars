@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { View } from '../types/types';
+import axios from "axios";
 
 interface Name {
     name: string;
@@ -35,7 +36,7 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = {
+    const info = {
         "name": "",
         "UID": 0
     }
@@ -46,10 +47,10 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
     console.log(email);
 
     try {
-    const response = await fetch("http://localhost:3000/api/user", {
+    const { data } = await axios("http://localhost:3000/api/user", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
-                body: JSON.stringify({
+                data: JSON.stringify({
                     username: userName,
                     forename: firstName,
                     surname: lastName,
@@ -57,12 +58,12 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
             }),
         })
         
-        const user = await response.json();
+        const { user } = data;
 
-        data.name = userName;
-        data.UID = user.id;
+        info.name = userName;
+        info.UID = user.id;
 
-        setName(data);
+        setName(info);
 
         setView('play');
     } catch (error) {
