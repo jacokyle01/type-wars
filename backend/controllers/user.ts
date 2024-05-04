@@ -82,3 +82,15 @@ export const deleteUsers = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const getUserByName = async (req: Request, res: Response) => {
+  const username = req.params['name'];
+  try {
+    const user = await User.findOne({ username }, { _id: 0, __v: 0 });
+    res.json(user);
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+

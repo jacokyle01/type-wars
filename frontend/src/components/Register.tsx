@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import { View } from '../types/types';
-import axios from "axios";
-
-interface Name {
-    name: string;
-    UID: number;
-  }
-
-import { User, View } from '../types/types';
+import { createAccount } from '../services/createAccount';
 
 interface FormProps {
-  setUser: (user: User) => void
-  setView: (view: View) => void
+  setView: (view: View) => void;
 }
 
-export const Register: React.FC<FormProps> = ({setUser, setView}) => {
+export const Register: React.FC<FormProps> = ({ setView }) => {
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -26,51 +18,52 @@ export const Register: React.FC<FormProps> = ({setUser, setView}) => {
 
   const handleChangeFirstName = (e: React.FormEvent<HTMLInputElement>) => {
     setFirstName(e.currentTarget.value);
-  }
+  };
 
   const handleChangeLastName = (e: React.FormEvent<HTMLInputElement>) => {
     setLastName(e.currentTarget.value);
-  }
+  };
 
   const handleChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const info = {
-        "name": "",
-        "id": 0
-    }
+    // const data = {
+    //     "name": "",
+    //     "id": 0
+    // }
+    createAccount({
+      username: userName,
+      forename: firstName,
+      surname: lastName,
+      email: email,
+    }).then(() => setView('login'));
 
-    console.log(userName);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
+    // try {
+    //   const response = await fetch('http://localhost:3000/api/user', {
+    //     method: 'POST',
+    //     headers: { 'content-type': 'application/json' },
+    //     body: JSON.stringify({
+    //       username: userName,
+    //       forename: firstName,
+    //       surname: lastName,
+    //       email: email,
+    //     }),
+    //   });
 
-    try {
-    const { data } = await axios("http://localhost:3000/api/user", {
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                data: JSON.stringify({
-                    username: userName,
-                    forename: firstName,
-                    surname: lastName,
-                    email: email
-            }),
-        })
-        
-        const { user } = data;
+    //   const user = await response.json();
 
-        data.name = userName;
-        data.id = user.id;
+    //   data.name = userName;
+    //   data.id = user.id;
 
-        setUser(info);
+    //   setUser(data);
 
-        setView('play');
-    } catch (error) {
-        console.error("Error:", error)
-    } 
+    setView('login');
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
   };
 
   return (

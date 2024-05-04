@@ -8,13 +8,7 @@ export const Leaderboard = () => {
   const [results, setResults] = useState<Result[] | null>(null);
 
   useEffect(() => {
-    // let ignore = false;
     setResults(null);
-    // fetchBio(person).then((result) => {
-    //   if (!ignore) {
-    //     setBio(result);
-    //   }
-    // });
     getLeaderboard({ words: wordQuery, limit: queryLimit }).then((data) => {
       console.log(data);
       setResults(data);
