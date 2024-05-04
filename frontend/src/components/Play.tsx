@@ -5,7 +5,7 @@ interface PlayProps {
   name: string;
 }
 
-let interval: number = -1;
+let interval: number = 0;
 
 export const Play: React.FC<PlayProps> = ({ name }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
@@ -57,6 +57,9 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
     console.log('hello');
     const { key } = e;
     setLastPressedKey(key);
+    if (key === targetString.charAt(completionIndex)) {
+      setCompletionIndex(completionIndex + 1);
+    }
   };
 
   return (
@@ -73,7 +76,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
                 <div id="test-wrap">
                   <h3>{targetString}</h3>
                   <div tabIndex={-1} onKeyDown={handleKeyDown} ref={inputRef}>
-                    Hello
+                    {targetString.slice(0, completionIndex)}
                   </div>
                   <h3>Last pressed key: {lastPressedKey}</h3>
                 </div>
