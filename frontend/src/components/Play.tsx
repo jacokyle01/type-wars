@@ -2,11 +2,11 @@ import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { Mode, TypingResult, User } from '../types/types';
 import { allowedKeys } from '../util/constants';
 import { wordGen } from '../util/word';
+import { postResult } from '../services/postResult';
 
 interface PlayProps {
   user: User;
 }
-
 let interval: number = 0;
 
 export const Play: React.FC<PlayProps> = ({ user }) => {
@@ -14,6 +14,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
   const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
   const [wordsTyped, setWordsTyped] = useState(0);
+  const [lastWpm, setLastWpm] = useState(0);
 
   const inputRef = useRef<HTMLDivElement>(null);
   const [spentTime, setSpentTime] = useState(0); //how long time is left. TODO should start at the timeControl
@@ -46,13 +47,20 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
     return spentTime ? (wordsTyped * 60) / spentTime : 0;
   };
 
-  const handleEnd = () => {
+  const resetGame = () => {
     clearInterval(interval);
     setTypingResult('null');
     setWordsTyped(0);
     setSpentTime(0);
     setCompletionIndex(0);
     setMode('finished');
+  }
+
+  const handleEnd = () => {
+    setLastWpm(getWpm());
+    postResult({ uname: user.name, uid: user.id, wpm: lastWpm, words: wordLimit })
+      .then(resetGame)
+      .catch(console.error);
   };
 
   const setTimer = () => {
@@ -95,8 +103,8 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
             return (
               <>
                 <div id="timeSelect">
-                  <div className={isSelected(1)} onClick={() => setWordLimit(1)}>
-                    1
+                  <div className={isSelected(3)} onClick={() => setWordLimit(3)}>
+                    3
                   </div>
                   <div className={isSelected(25)} onClick={() => setWordLimit(25)}>
                     25
@@ -136,7 +144,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
           case 'finished':
             return (
               <>
-                <h1>Your wpm: {getWpm()}</h1>
+                <h1>Your wpm: {lastWpm}</h1>
                 <button onClick={() => handleStart()}>Play again?</button>
               </>
             );
