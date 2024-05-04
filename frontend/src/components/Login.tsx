@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { View } from '../types/types';
+import { User, View } from '../types/types';
+import { getUser } from '../services/getUser';
 
 interface FormProps {
-  setName: (name: string) => void
-  setView: (view: View) => void
+  setUser: (user: User) => void;
+  setView: (view: View) => void;
 }
 
-export const Login: React.FC<FormProps> = ({setName ,setView}) => {
+export const Login: React.FC<FormProps> = ({ setUser, setView }) => {
   const [userInput, setUserInput] = useState('');
+  const [apiResult, setApiResult] = useState('');
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setUserInput(e.currentTarget.value);
@@ -15,14 +17,30 @@ export const Login: React.FC<FormProps> = ({setName ,setView}) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setName(userInput);
-    setView('play');
+    getUser({ username: userInput })
+      .then((data) => {
+        setApiResult('Success!');
+        console.log(data);
+        const { id, name } = data;
+        setUser({
+          id,
+          name,
+        });
+        setView('play');
+      })
+      .catch((error) => {
+        console.log('error: ', error);
+        setApiResult('Error logging in. Try again.');
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input value={userInput} onChange={handleChange} type="text" placeholder="Enter username"/>
-      <button>Enter</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input value={userInput} onChange={handleChange} type="text" placeholder="Enter username" />
+        <button>Enter</button>
+      </form>
+      <h2>{apiResult}</h2>
+    </>
   );
 };

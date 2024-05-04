@@ -4,14 +4,17 @@ import { Play } from './components/Play';
 import { Register } from './components/Register';
 import { Leaderboard } from './components/Leaderboard';
 import { Profile } from './components/Profile';
+import { Login } from './components/Login';
 
 const App = () => {
-  const [view, setView] = useState<View>('profile');
-  const [user, setUser] = useState<User>({ name: 'joe', id: 15 });
+  const [view, setView] = useState<View>('login');
+  const [user, setUser] = useState<User>({ name: '', id: 0 });
 
   switch (view) {
     case 'register':
-      return <Register setUser={setUser} setView={setView}></Register>;
+      return <Register setView={setView}></Register>;
+    case 'login':
+      return <Login setUser={setUser} setView={setView}></Login>
     case 'play':
       return <Play user={user} setView={setView}></Play>;
     case 'leaderboard':
