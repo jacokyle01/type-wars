@@ -13,6 +13,8 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
   const [wordLimit, setWordLimit] = useState(100);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
+  const [wordsTyped, setWordsTyped] = useState(0);
+
   const inputRef = useRef<HTMLDivElement>(null);
   const [remainingTime, setRemainingTime] = useState(10); //how long time is left. TODO should start at the timeControl
   useEffect(() => {
@@ -27,8 +29,6 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   const [completionIndex, setCompletionIndex] = useState(0);
   const [lastPressedKey, setLastPressedKey] = useState('');
 
-  const [wpm, setWpm] = useState(0);
-
   const handleStart = () => {
     setMode('inProgress'); //updates view
     //TODO make util method that does this
@@ -38,6 +38,12 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
     // setEnded(false);
     // setInput(quote.quote);
     setTimer();
+  };
+
+  //TODO wpm
+  //TODO uses a constant!
+  const getWpm = () => {
+    return wordsTyped * 60 / (10 - remainingTime);
   };
 
   const handleEnd = () => {
@@ -61,6 +67,9 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
     e.preventDefault();
     const { key } = e;
     if (key === targetString.charAt(completionIndex)) {
+      if (key == " ") {
+        setWordsTyped(wordsTyped + 1);
+      }
       setTypingResult('correct');
       setCompletionIndex(completionIndex + 1);
       setLastPressedKey(key);
@@ -80,10 +89,11 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
             return (
               <>
                 <h1>Time remaining: {remainingTime}</h1>
+                <h1>Your wpm: {getWpm()}</h1>
                 <div id="test-wrap">
                   <h3>{targetString}</h3>
                   <div className={typingResult} tabIndex={-1} onKeyDown={handleKeyDown} ref={inputRef}>
-                    {targetString.slice(0, completionIndex) + "|"}
+                    {targetString.slice(0, completionIndex) + '|'}
                   </div>
                   <h3>Last pressed key: {lastPressedKey}</h3>
                 </div>
@@ -93,7 +103,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
           case 'finished':
             return (
               <>
-                <h1>Your wpm: {wpm}</h1>
+                <h1>Your wpm: {getWpm()}</h1>
                 <button onClick={() => handleStart()}>Play again?</button>
               </>
             );
