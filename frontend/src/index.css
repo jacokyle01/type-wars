@@ -1,9 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .incorrect {
-  border: 3px solid red;
+  color: red;
 }
 
 .correct {
-  border: 3px solid lime;
+  color: lime;
 }
 
 *:focus {
