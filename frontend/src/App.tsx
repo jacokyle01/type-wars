@@ -9,7 +9,7 @@ import { Navbar } from './components/Navbar';
 
 const App = () => {
   const [view, setView] = useState<View>('play');
-  const [user, setUser] = useState<User>({ name: '', id: 0 });
+  const [user, setUser] = useState<User>({ name: 'foo', id: 0 });
 
   const renderView = () => {
     switch (view) {
