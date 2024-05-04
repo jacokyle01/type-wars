@@ -1,15 +1,17 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
-import { Mode, TypingResult, User } from '../types/types';
+import { Mode, TypingResult, User, View } from '../types/types';
 import { allowedKeys } from '../util/constants';
 import { wordGen } from '../util/word';
 import { postResult } from '../services/postResult';
 
 interface PlayProps {
   user: User;
+  setView: (view: View) => void
+
 }
 let interval: number = 0;
 
-export const Play: React.FC<PlayProps> = ({ user }) => {
+export const Play: React.FC<PlayProps> = ({ user, setView }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
   const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
@@ -123,6 +125,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
                   </div>
                 </div>
                 <button onClick={() => handleStart()}>Click to play</button>
+                <button onClick={() => setView('leaderboard')}>See leaderboard</button>
               </>
             );
           case 'inProgress': //could be a separate component
