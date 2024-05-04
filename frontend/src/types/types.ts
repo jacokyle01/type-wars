@@ -5,3 +5,10 @@ export interface User {
   name: string;
   id: number;
 }
+export type Result = {
+  uid: number;
+  uname: string;
+  wpm: number;
+  words: number;
+  createdAt: string
+};

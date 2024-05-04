@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { getLeaderboard } from '../services/getLeaderboard';
+import { Result } from '../types/types';
 
 export const Leaderboard = () => {
   const [wordQuery, setWordQuery] = useState(25);
   const [queryLimit, setQueryLimit] = useState(25);
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState<Result[] | null>(null);
 
   useEffect(() => {
     // let ignore = false;
@@ -13,6 +15,11 @@ export const Leaderboard = () => {
     //     setBio(result);
     //   }
     // });
+    getLeaderboard({ words: wordQuery, limit: queryLimit }).then((data) => {
+      console.log(data);
+      setResults(data);
+    });
+
     return () => {
       // ignore = true;
     };
@@ -22,10 +29,11 @@ export const Leaderboard = () => {
     return wc == wordQuery ? 'currentWordLimit' : 'wordLimit';
   };
 
-  const handleLimitChange = (event) => {
+  const handleLimitChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQueryLimit(parseInt(event.target.value));
   };
 
+  //TODO query all?
   return (
     <>
       <div id="timeSelect">
@@ -62,7 +70,16 @@ export const Leaderboard = () => {
         <span>{queryLimit}</span>
       </div>
       <h1>Leaderboard</h1>
-      <div id="leaderboard-wrap">{results ?? 'Loading...'}</div>
+      <div id="leaderboard-wrap">
+        {results
+          ? results.map((result, index) => (
+              <div key={index}>
+                <p>Name: {result.uname}</p>
+                <p>Wpm: {result.wpm}</p>
+              </div>
+            ))
+          : 'Loading'}
+      </div>
     </>
   );
 };
