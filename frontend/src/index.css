@@ -1,0 +1,15 @@
+.incorrect {
+  border: 3px solid red;
+}
+
+.correct {
+  border: 3px solid lime;
+}
+
+*:focus {
+  outline: none;
+}
+
+.currentWordLimit {
+  border: 1px solid black;
+}

@@ -26,8 +26,8 @@ export const addUser = async (req: Request, res: Response) => {
 
   await user
     .save()
-    .then(user => res.status(201).json({ user }))
-    .catch(error => res.status(500).json({ error }));
+    .then((user) => res.status(201).json({ user }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 export const getUser = async (req: Request, res: Response) => {
@@ -69,6 +69,16 @@ export const updateEmail = async (req: Request, res: Response) => {
     res.json({ message: 'Email updated successfully', user: updatedUser });
   } catch (error) {
     console.error('Error updating email:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const deleteUsers = async (req: Request, res: Response) => {
+  try {
+    await User.deleteMany({});
+    res.json({ message: 'Users deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting users:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "4f84e125-f67a-4dbd-a740-bf6d7920c548",
     "name": "Type Wars",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
     "_exporter_id": "33043794"
   },
   "item": [
@@ -22,12 +22,7 @@
           "request": {
             "method": "POST",
             "header": [],
-            "url": {
-              "raw": "localhost:3000/api/user",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "user"]
-            }
+            "url": "localhost:3000/api/user"
           },
           "response": []
         },
@@ -36,10 +31,7 @@
           "request": {
             "method": "DELETE",
             "header": [],
-            "url": {
-              "raw": "test",
-              "host": ["test"]
-            }
+            "url": "test"
           },
           "response": []
         },
@@ -48,12 +40,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "localhost:3000/api/user/12",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "user", "12"]
-            }
+            "url": "localhost:3000/api/user/12"
           },
           "response": []
         },
@@ -71,12 +58,16 @@
                 }
               }
             },
-            "url": {
-              "raw": "localhost:3000/api/user/13",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "user", "13"]
-            }
+            "url": "localhost:3000/api/user/13"
+          },
+          "response": []
+        },
+        {
+          "name": "delete all users",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "localhost:3000/api/user"
           },
           "response": []
         }
@@ -92,19 +83,14 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"uid\": 13,\n    \"wpm\": 150,\n    \"timeControl\": 30\n}",
+              "raw": "{\n    \"uid\": 13,\n    \"wpm\": 150,\n    \"words\": 25\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             },
-            "url": {
-              "raw": "localhost:3000/api/result",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "result"]
-            }
+            "url": "localhost:3000/api/result"
           },
           "response": []
         },
@@ -113,12 +99,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "localhost:3000/api/result/3",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "result", "3"]
-            }
+            "url": "localhost:3000/api/result/3"
           },
           "response": []
         },
@@ -127,12 +108,7 @@
           "request": {
             "method": "POST",
             "header": [],
-            "url": {
-              "raw": "localhost:3000/api/result/fill/10",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "result", "fill", "10"]
-            }
+            "url": "localhost:3000/api/result/fill/10"
           },
           "response": []
         },
@@ -141,12 +117,25 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "localhost:3000/api/result",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "result"]
-            }
+            "url": "localhost:3000/api/result"
+          },
+          "response": []
+        },
+        {
+          "name": "get results from by user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "localhost:3000/api/result/from/15"
+          },
+          "response": []
+        },
+        {
+          "name": "delete all results",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "localhost:3000/api/result"
           },
           "response": []
         }
@@ -160,12 +149,7 @@
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "localhost:3000/api/leaderboard",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["api", "leaderboard"]
-            }
+            "url": "localhost:3000/api/leaderboard"
           },
           "response": []
         },
@@ -175,13 +159,13 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:3000/api/leaderboard?timeControl=30&limit=20",
+              "raw": "localhost:3000/api/leaderboard?words=25&limit=20",
               "host": ["localhost"],
               "port": "3000",
               "path": ["api", "leaderboard"],
               "query": [
                 {
-                  "key": "timeControl",
+                  "key": "words",
                   "value": "30"
                 },
                 {

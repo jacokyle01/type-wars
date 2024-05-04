@@ -6,12 +6,13 @@ import { PostedResult } from '../types/types';
 
 export const addResult = async (req: Request, res: Response) => {
   console.log(req.body);
-  const { uid, wpm, timeControl, createdAt } = req.body;
+  const { uname, uid, wpm, words, createdAt } = req.body;
   const result = new Result({
     _id: new mongoose.Types.ObjectId(),
+    uname,
     uid,
     wpm,
-    timeControl,
+    words,
     createdAt: Date.now(),
   });
 
@@ -61,5 +62,15 @@ export const getResultsFromUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error fetching results:', error);
     res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+export const deleteResults = async (req: Request, res: Response) => {
+  try {
+    await Result.deleteMany({});
+    res.json({ message: 'Results deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting results:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

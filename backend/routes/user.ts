@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import { allUsers, addUser, getUser, updateEmail, deleteUser} from '../controllers/user';
+import { allUsers, addUser, getUser, updateEmail, deleteUser, deleteUsers} from '../controllers/user';
 
 const router = Router();
 //all users
@@ -18,6 +18,9 @@ router.post('', addUser);
 // delete a user
 // ex. user deletes his account
 router.delete('/:id', deleteUser);
+
+//delete all users 
+router.delete('', deleteUsers);
 
 
 export default router;

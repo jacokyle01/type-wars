@@ -7,12 +7,14 @@ interface Name {
     UID: number;
   }
 
+import { User, View } from '../types/types';
+
 interface FormProps {
-  setName: (name: Name) => void
+  setUser: (user: User) => void
   setView: (view: View) => void
 }
 
-export const Register: React.FC<FormProps> = ({setName ,setView}) => {
+export const Register: React.FC<FormProps> = ({setUser, setView}) => {
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -38,7 +40,7 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
     e.preventDefault();
     const info = {
         "name": "",
-        "UID": 0
+        "id": 0
     }
 
     console.log(userName);
@@ -60,10 +62,10 @@ export const Register: React.FC<FormProps> = ({setName ,setView}) => {
         
         const { user } = data;
 
-        info.name = userName;
-        info.UID = user.id;
+        data.name = userName;
+        data.id = user.id;
 
-        setName(info);
+        setUser(info);
 
         setView('play');
     } catch (error) {
