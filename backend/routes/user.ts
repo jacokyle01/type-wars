@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import { allUsers, addUser, getUser, updateEmail, deleteUser, deleteUsers} from '../controllers/user';
+import { allUsers, addUser, getUser, updateEmail, deleteUser, deleteUsers, getUserByName} from '../controllers/user';
 
 const router = Router();
 //all users
@@ -7,6 +7,9 @@ router.get('', allUsers);
 
 //get a user by id
 router.get('/:id', getUser);
+
+//get a user by username 
+router.get('/name/:name', getUserByName)
 
 //update information of a user
 //use case: update email
