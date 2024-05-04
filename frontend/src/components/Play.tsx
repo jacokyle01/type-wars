@@ -101,7 +101,7 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
           {[25, 50, 100, 150, 200].map((option, index) => (
             <button
               key={index}
-              className={`m-2 p-3 rounded ${wordLimit === option ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`m-2 p-3 rounded ${wordLimit === option ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
               onClick={() => setWordLimit(option)}
             >
               {option}
@@ -116,7 +116,7 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
     return (
       <div
         id="test-wrap"
-        className="h-1/5 w-1/2 mx-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+        className="h-1/5 w-1/2 mx-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
         tabIndex={-1}
         onKeyDown={handleKeyDown}
         ref={inputRef}
@@ -134,7 +134,7 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
       {mode == 'notStarted' ? (
         <button
           onClick={() => handleStart()}
-          className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
           Start playing
         </button>
