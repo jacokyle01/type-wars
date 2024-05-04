@@ -4,7 +4,6 @@ import { View } from '../types/types';
 interface FormProps {
   setName: (name: string) => void
   setView: (view: View) => void
-
 }
 
 export const Login: React.FC<FormProps> = ({setName ,setView}) => {
