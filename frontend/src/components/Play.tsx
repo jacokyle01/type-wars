@@ -43,11 +43,17 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   //TODO wpm
   //TODO uses a constant!
   const getWpm = () => {
-    return (spentTime) ? (wordsTyped * 60) / (spentTime) : 0;
+    return spentTime ? (wordsTyped * 60) / spentTime : 0;
   };
 
   const handleEnd = () => {
     clearInterval(interval);
+    setTypingResult('null');
+    setWordsTyped(0);
+    setSpentTime(0);
+    setCompletionIndex(0);
+
+
     setMode('finished');
   };
 
@@ -70,6 +76,9 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
       setTypingResult('correct');
       setCompletionIndex(completionIndex + 1);
       setLastPressedKey(key);
+      if (completionIndex + 1 === targetString.length) {
+        handleEnd();
+      }
     } else if (allowedKeys.includes(key)) {
       setTypingResult('incorrect');
     }
@@ -88,6 +97,9 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
             return (
               <>
                 <div id="timeSelect">
+                  <div className={isSelected(1)} onClick={() => setWordLimit(1)}>
+                    1
+                  </div>
                   <div className={isSelected(25)} onClick={() => setWordLimit(25)}>
                     25
                   </div>
