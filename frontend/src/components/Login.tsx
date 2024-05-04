@@ -21,10 +21,10 @@ export const Login: React.FC<FormProps> = ({ setUser, setView }) => {
       .then((data) => {
         setApiResult('Success!');
         console.log(data);
-        const { id, name } = data;
+        const { id, username } = data;
         setUser({
           id,
-          name,
+          name: username,
         });
         setView('play');
       })
