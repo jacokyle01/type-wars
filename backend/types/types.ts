@@ -1,7 +1,8 @@
 //TODO change
 export type PostedResult = {
+  uname: string;
   uid: number;
   wpm: number;
-  timeControl: number;
+  words: number;
   createdAt: number
 };
