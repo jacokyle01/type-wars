@@ -16,7 +16,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   const [wordsTyped, setWordsTyped] = useState(0);
 
   const inputRef = useRef<HTMLDivElement>(null);
-  const [remainingTime, setRemainingTime] = useState(10); //how long time is left. TODO should start at the timeControl
+  const [spentTime, setSpentTime] = useState(0); //how long time is left. TODO should start at the timeControl
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -43,10 +43,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   //TODO wpm
   //TODO uses a constant!
   const getWpm = () => {
-    if (remainingTime == 10) {
-      return 0;
-    }
-    return (wordsTyped * 60) / (10 - remainingTime);
+    return (spentTime) ? (wordsTyped * 60) / (spentTime) : 0;
   };
 
   const handleEnd = () => {
@@ -55,14 +52,11 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   };
 
   const setTimer = () => {
-    const now = Date.now();
-    const seconds = now + remainingTime * 1000;
+    const startTime = Date.now();
     interval = setInterval(() => {
-      const secondsLeft = Math.round((seconds - Date.now()) / 1000);
-      setRemainingTime(secondsLeft);
-      if (secondsLeft === 0) {
-        handleEnd();
-      }
+      const elapsedTime = Date.now() - startTime;
+      const secondsPassed = Math.round(elapsedTime / 1000);
+      setSpentTime(secondsPassed);
     }, 1000);
   };
 
@@ -82,8 +76,8 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
   };
 
   const isSelected = (wc: number) => {
-    return wc == wordLimit ? "currentWordLimit" : "wordLimit";
-  }
+    return wc == wordLimit ? 'currentWordLimit' : 'wordLimit';
+  };
 
   return (
     <>
@@ -94,11 +88,21 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
             return (
               <>
                 <div id="timeSelect">
-                  <div className={isSelected(25)} onClick={() => setWordLimit(25)}>25</div>
-                  <div className={isSelected(50)} onClick={() => setWordLimit(50)}>50</div>
-                  <div className={isSelected(100)} onClick={() => setWordLimit(100)}>100</div>
-                  <div className={isSelected(150)} onClick={() => setWordLimit(150)}>150</div>
-                  <div className={isSelected(200)} onClick={() => setWordLimit(200)}>200</div>
+                  <div className={isSelected(25)} onClick={() => setWordLimit(25)}>
+                    25
+                  </div>
+                  <div className={isSelected(50)} onClick={() => setWordLimit(50)}>
+                    50
+                  </div>
+                  <div className={isSelected(100)} onClick={() => setWordLimit(100)}>
+                    100
+                  </div>
+                  <div className={isSelected(150)} onClick={() => setWordLimit(150)}>
+                    150
+                  </div>
+                  <div className={isSelected(200)} onClick={() => setWordLimit(200)}>
+                    200
+                  </div>
                 </div>
                 <button onClick={() => handleStart()}>Click to play</button>
               </>
@@ -106,7 +110,7 @@ export const Play: React.FC<PlayProps> = ({ name }) => {
           case 'inProgress': //could be a separate component
             return (
               <>
-                <h1>Time remaining: {remainingTime}</h1>
+                <h1>Time spent: {spentTime}</h1>
                 <h1>Your wpm: {getWpm()}</h1>
                 <div id="test-wrap">
                   <h3>{targetString}</h3>
