@@ -17,7 +17,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const cors = require('cors');
+import cors from 'cors';
 app.use(cors());
 
 const PORT = 3000;

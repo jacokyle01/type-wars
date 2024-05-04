@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from 'express';
-import { addResult, allResults, fillResults, getResult, getResultsFromUser } from '../controllers/result'
+import { addResult, allResults, deleteResults, fillResults, getResult, getResultsFromUser } from '../controllers/result'
 
 const router = Router();
 //all users
@@ -16,5 +16,9 @@ router.get('', allResults);
 
 //results from a certain user
 router.get('/from/:uid', getResultsFromUser);
+
+//delete all results
+router.delete('', deleteResults);
+
 
 export default router;
