@@ -5,23 +5,33 @@ import { Register } from './components/Register';
 import { Leaderboard } from './components/Leaderboard';
 import { Profile } from './components/Profile';
 import { Login } from './components/Login';
+import { Navbar } from './components/Navbar';
 
 const App = () => {
-  const [view, setView] = useState<View>('register');
-  const [user, setUser] = useState<User>({ name: '', id: 0 });
+  const [view, setView] = useState<View>('play');
+  const [user, setUser] = useState<User>({ name: 'foo', id: 0 });
 
-  switch (view) {
-    case 'register':
-      return <Register setView={setView}></Register>;
-    case 'login':
-      return <Login setUser={setUser} setView={setView}></Login>
-    case 'play':
-      return <Play user={user} setView={setView}></Play>;
-    case 'leaderboard':
-      return <Leaderboard></Leaderboard>; // Assuming there's a Leaderboard component
-    case 'profile':
-      return <Profile user={user} setView={setView}></Profile>
-  }
+  const renderView = () => {
+    switch (view) {
+      case 'register':
+        return <Register setView={setView}></Register>;
+      case 'login':
+        return <Login setUser={setUser} setView={setView}></Login>;
+      case 'play':
+        return <Play user={user} setView={setView}></Play>;
+      case 'leaderboard':
+        return <Leaderboard></Leaderboard>; // Assuming there's a Leaderboard component
+      case 'profile':
+        return <Profile user={user} setView={setView}></Profile>;
+    }
+  };
+
+  return (
+    <>
+      <Navbar setView={setView}></Navbar>
+      {renderView()}
+    </>
+  );
 };
 
 export default App;
