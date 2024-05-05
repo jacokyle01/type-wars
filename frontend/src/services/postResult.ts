@@ -12,6 +12,7 @@ export async function postResult({
   words: number;
 }) {
   try {
+    console.log(wpm);
     const { data } = await axios({
       data: {
         uname,
