@@ -10,7 +10,7 @@ interface PlayProps {
 }
 let interval: number = 0;
 
-export const Play: React.FC<PlayProps> = ({ user, setView }) => {
+export const Play: React.FC<PlayProps> = ({ user }) => {
   const [mode, setMode] = useState<Mode>('notStarted');
   const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
@@ -32,7 +32,7 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
   //this is the list of words we are trying to type
   //indexes up to what position we have succesfully entered values
   const [completionIndex, setCompletionIndex] = useState(0);
-  const [lastPressedKey, setLastPressedKey] = useState('');
+  // const [lastPressedKey, setLastPressedKey] = useState('');
 
   const handleStart = () => {
     setMode('inProgress'); //updates view
@@ -56,12 +56,11 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
     setWordsTyped(0);
     setSpentTime(0);
     setCompletionIndex(0);
-    setMode('finished');
+    setMode('notStarted');
   };
 
   const handleEnd = () => {
-    setLastWpm(getWpm());
-    postResult({ uname: user.name, uid: user.id, wpm: lastWpm, words: wordLimit })
+    postResult({ uname: user.name, uid: user.id, wpm: getWpm(), words: wordLimit })
       .then(resetGame)
       .catch(console.error);
   };
@@ -76,6 +75,10 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    if (mode != 'inProgress') {
+      handleStart();
+    }
+    // setMode('inProgress');
     e.preventDefault();
     const { key } = e;
     if (key === targetString.charAt(completionIndex)) {
@@ -84,7 +87,7 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
       }
       setTypingResult('correct');
       setCompletionIndex(completionIndex + 1);
-      setLastPressedKey(key);
+      // setLastPressedKey(key);
       if (completionIndex + 1 === targetString.length) {
         handleEnd();
       }
@@ -96,7 +99,9 @@ export const Play: React.FC<PlayProps> = ({ user, setView }) => {
   const renderWordCountSelect = () => {
     return (
       <>
-        <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Choose your word count</div>
+        <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Choose your word count
+        </div>
         <div id="select-wrap" className="flex flex-wrap justify-center">
           {[25, 50, 100, 150, 200].map((option, index) => (
             <button
