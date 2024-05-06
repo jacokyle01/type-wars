@@ -103,20 +103,23 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
           Play
           <div className="text-gray-500 text-lg font-normal">Complete a typing test</div>
         </div>
-
-        <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Choose your word count
-        </div>
-        <div id="select-wrap" className="flex flex-wrap justify-center">
-          {[25, 50, 100, 150, 200].map((option, index) => (
-            <button
-              key={index}
-              className={`m-2 p-3 rounded ${wordLimit === option ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-              onClick={() => setWordLimit(option)}
-            >
-              {option}
-            </button>
-          ))}
+        <div id="word-count-wrap" className="rounded-md ring-2 ring-gray-100 w-1/3 mx-auto">
+          <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Choose your word count
+          </div>
+          <div id="select-wrap" className="flex flex-wrap justify-center">
+            {[25, 50, 100, 150, 200].map((option, index) => (
+              <button
+                key={index}
+                className={`m-2 p-3 rounded ${
+                  wordLimit === option ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                }`}
+                onClick={() => setWordLimit(option)}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
         </div>
       </>
     );
