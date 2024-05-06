@@ -129,7 +129,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
     return (
       <div
         id="test-wrap"
-        className="h-1/5 w-1/2 mx-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+        className="h-1/5 w-1/2 mx-auto px-4 py-2 rounded-md ring-2 ring-gray-100 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
         tabIndex={-1}
         onKeyDown={handleKeyDown}
         ref={inputRef}
