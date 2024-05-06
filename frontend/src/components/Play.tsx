@@ -139,17 +139,19 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
       {mode == 'notStarted' ? (
         <button
           onClick={() => handleStart()}
-          className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          className="mx-auto my-3 w-32 flex justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
           Start playing
         </button>
       ) : (
         <>
-          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
-            Time spent: {spentTime}
-          </div>
-          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
-            WPM: {getWpm()}
+          <div className="flex justify-center">
+            <div className="mx-3 my-3 w-32 flex justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
+              Time spent: {spentTime}
+            </div>
+            <div className="mx-3 my-3 w-32 flex justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
+              WPM: {getWpm()}
+            </div>
           </div>
         </>
       )}
