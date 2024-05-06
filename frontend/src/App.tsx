@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar setView={setView}></Navbar>
+      <Navbar view={view} setView={setView}></Navbar>
       {renderView()}
     </>
   );

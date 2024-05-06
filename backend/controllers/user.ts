@@ -15,6 +15,11 @@ export const allUsers = async (req: Request, res: Response) => {
 export const addUser = async (req: Request, res: Response) => {
   console.log(req.body);
   const { username, forename, surname, email } = req.body;
+  const u = await User.findOne({ username: username });
+  if (u) {
+    res.status(400).json({ message: 'Username already in use' });
+  }
+  else {
   const user = new User({
     _id: new mongoose.Types.ObjectId(),
     username,
@@ -24,10 +29,12 @@ export const addUser = async (req: Request, res: Response) => {
     createdAt: Date.now(),
   });
 
+
   await user
     .save()
     .then((user) => res.status(201).json({ user }))
     .catch((error) => res.status(500).json({ error }));
+}
 };
 
 export const getUser = async (req: Request, res: Response) => {

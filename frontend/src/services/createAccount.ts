@@ -26,5 +26,6 @@ export async function createAccount({
     return data;
   } catch (error) {
     console.error('error: ', error);
+    throw 'user already exists';
   }
 }

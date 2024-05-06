@@ -139,66 +139,34 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
       {mode == 'notStarted' ? (
         <button
           onClick={() => handleStart()}
-          className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-blue-600
+          px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
           Start playing
         </button>
       ) : (
         <>
-          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
+          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md 
+          bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
             Time spent: {spentTime}
           </div>
-          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
+          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md 
+          bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
             WPM: {getWpm()}
           </div>
         </>
       )}
       {/* <button
         onClick={() => handleStart()}
-        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 
+        text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 
+        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
+        focus-visible:outline-indigo-600"
       >
         Start playing
       </button> */}
       {renderTest()}
     </>
-
-    // <>
-    //   <h1>Hello {user.name}</h1>
-    //   {(() => {
-    //     switch (mode) {
-    //       case 'notStarted':
-    //         return (
-    //           <>
-    //             {renderWordCountSelect()}
-    //             <button
-    //               onClick={() => handleStart()}
-    //               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    //             >
-    //               Start playing
-    //             </button>
-    //             {renderTest()}
-    //             <button onClick={() => setView('leaderboard')}>See leaderboard</button>
-    //           </>
-    //         );
-    //       case 'inProgress': //could be a separate component
-    //         return (
-    //           <>
-    //             <h1>Time spent: {spentTime}</h1>
-    //             <h1>Your wpm: {getWpm()}</h1>
-    //             {renderTest()}
-    //             <h3>Last pressed key: {lastPressedKey}</h3>
-    //           </>
-    //         );
-
-    //       case 'finished':
-    //         return (
-    //           <>
-    //             <h1>Your wpm: {lastWpm}</h1>
-    //             <button onClick={() => handleStart()}>Play again?</button>
-    //           </>
-    //         );
-    //     }
-    //   })()}
-    // </>
   );
 };

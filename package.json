@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.4.4"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.2"
   }
 }

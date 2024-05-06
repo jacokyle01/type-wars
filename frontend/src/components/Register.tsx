@@ -11,6 +11,7 @@ export const Register: React.FC<FormProps> = ({ setView }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [apiResult, setApiResult] = useState('');
 
   const handleChangeUserName = (e: React.FormEvent<HTMLInputElement>) => {
     setUserName(e.currentTarget.value);
@@ -30,40 +31,20 @@ export const Register: React.FC<FormProps> = ({ setView }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const data = {
-    //     "name": "",
-    //     "id": 0
-    // }
-    createAccount({
-      username: userName,
-      forename: firstName,
-      surname: lastName,
-      email: email,
-    }).then(() => setView('login'));
-
-    // try {
-    //   const response = await fetch('http://localhost:3000/api/user', {
-    //     method: 'POST',
-    //     headers: { 'content-type': 'application/json' },
-    //     body: JSON.stringify({
-    //       username: userName,
-    //       forename: firstName,
-    //       surname: lastName,
-    //       email: email,
-    //     }),
-    //   });
-
-    //   const user = await response.json();
-
-    //   data.name = userName;
-    //   data.id = user.id;
-
-    //   setUser(data);
-
-    setView('login');
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
+ 
+      createAccount({
+        username: userName,
+        forename: firstName,
+        surname: lastName,
+        email: email,
+      })
+        .then(() => {
+        setView('login');
+      })
+      .catch(() => {
+        setApiResult('User already exists');
+      });
+  
   };
 
   return (
@@ -102,6 +83,7 @@ export const Register: React.FC<FormProps> = ({ setView }) => {
       >
         Sign Up
       </button>
+      <h3 className="mt-2">{apiResult}</h3>
     </form>
   );
 };
