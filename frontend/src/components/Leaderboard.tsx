@@ -73,21 +73,15 @@ export const Leaderboard = () => {
             </tr>
           </thead>
           <tbody>
-            {results ? (
-              results.map((result, index) => (
-                <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                  <td className="border border-gray-300 px-4 py-2 w-10">{index + 1}</td>
-                  <td className="border border-gray-300 px-4 py-2 w-10">{result.uname}</td>
-                  <td className="border border-gray-300 px-4 py-2 w-10">{result.wpm}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="border border-gray-300 px-4 py-2 text-center">
-                  Loading
-                </td>
-              </tr>
-            )}
+            {results
+              ? results.map((result, index) => (
+                  <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                    <td className="border border-gray-300 px-4 py-2 w-10">{index + 1}</td>
+                    <td className="border border-gray-300 px-4 py-2 w-10">{result.uname}</td>
+                    <td className="border border-gray-300 px-4 py-2 w-10">{result.wpm}</td>
+                  </tr>
+                ))
+              : 0}
           </tbody>
         </table>
       </div>
