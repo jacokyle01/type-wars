@@ -36,11 +36,11 @@ export const Login: React.FC<FormProps> = ({ setUser, setView }) => {
 
   return (
     <>
-      <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Login
-        <div className="text-gray-500 text-lg font-normal">Start playing</div>
-      </div>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto m-20">
+      <div className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
+          Login
+          <div className="text-gray-500 text-lg font-normal py-2">Start playing</div>
+        </div>
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto my-5">
         <input
           value={userInput}
           onChange={handleChange}
@@ -52,7 +52,7 @@ export const Login: React.FC<FormProps> = ({ setUser, setView }) => {
           Login
         </button>
       </form>
-      <h2>{apiResult}</h2>
+      <h2 className='text-red-500 font-bold mx-auto text-center'>{apiResult}</h2>
     </>
   );
 };

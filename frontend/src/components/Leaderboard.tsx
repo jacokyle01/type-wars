@@ -26,44 +26,50 @@ export const Leaderboard = () => {
   //TODO query all?
   return (
     <>
-      <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      <div className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
         Leaderboard
-        <div className="text-gray-500 text-lg font-normal">View the top results from each word count</div>
+        <div className="text-gray-500 text-lg font-normal py-2">View the top results</div>
       </div>
 
-      <div
-        id="parameter-wrap"
-        className="flex items-center	justify-center space-x-40 my-5 py-5 justify-items-center rounded-md ring-2 ring-gray-100 w-1/3 mx-auto rounded-lg"
-      >
-        <div id="word-wrap " className="flex flex-col justify-center items-center">
-          {/* <div className="mt-10 text-center text-1xl leading-9 tracking-tight text-gray-900">Words</div> */}
-          <div id="select-wrap" className="flex flex-wrap justify-center">
-            {[25, 50, 100, 150, 200].map((option, index) => (
-              <button
-                key={index}
-                className={`m-1 p-1 rounded ${
-                  wordQuery === option ? 'bg-blue-500 text-white' : 'bg-gray-200'
-                }`}
-                onClick={() => setWordQuery(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+      <div id="parameter-wrap" className="rounded-md ring-2 ring-gray-100 w-1/3 mx-auto rounded-lg">
+        <div id="flex-parameter-labels" className="flex justify-between">
+          <h3 className='text-black-500 text-lg font-normal px-3'>Words</h3>
+          <h3 className='text-black-500 text-lg font-normal px-3'>Entries</h3>
         </div>
-        <div className="flex items-center">
-          {/* <label htmlFor="limit">Limit:</label> */}
-          <input
-            type="range"
-            id="limit"
-            name="limit"
-            min="1"
-            max="100"
-            value={queryLimit}
-            onChange={handleLimitChange}
-            className="block w-30px bg-gray-200 appearance-none rounded h-2"
-          />
-          <span>{queryLimit}</span>
+        <div
+          id="parameter-widgets"
+          className="flex items justify-center space-x-40 mb-2 justify-items-center"
+        >
+          <div id="word-wrap " className="flex flex-col justify-center items-center">
+            {/* <div className="mt-10 text-center text-1xl leading-9 tracking-tight text-gray-900">Words</div> */}
+            <div id="select-wrap" className="flex flex-wrap justify-center">
+              {[25, 50, 100, 150, 200].map((option, index) => (
+                <button
+                  key={index}
+                  className={`m-1 p-1 rounded ${
+                    wordQuery === option ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                  }`}
+                  onClick={() => setWordQuery(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center">
+            {/* <label htmlFor="limit">Limit:</label> */}
+            <input
+              type="range"
+              id="limit"
+              name="limit"
+              min="1"
+              max="100"
+              value={queryLimit}
+              onChange={handleLimitChange}
+              className="block w-30px bg-gray-200 appearance-none rounded h-2"
+            />
+            <span>{queryLimit}</span>
+          </div>
         </div>
       </div>
       <div id="leaderboard-wrap" className="w-1/2 flex mx-auto">

@@ -68,11 +68,11 @@ export const Register: React.FC<FormProps> = ({ setView }) => {
 
   return (
     <>
-      <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Register
-        <div className="text-gray-500 text-lg font-normal">Create your account</div>
-      </div>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto m-20">
+      <div className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
+          Register
+          <div className="text-gray-500 text-lg font-normal py-2">Create your account</div>
+        </div>
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto my-5">
         <input
           value={firstName}
           onChange={handleChangeFirstName}
