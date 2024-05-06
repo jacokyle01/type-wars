@@ -100,6 +100,11 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
     return (
       <>
         <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Play
+          <div className="text-gray-500 text-lg font-normal">Complete a typing test</div>
+        </div>
+
+        <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Choose your word count
         </div>
         <div id="select-wrap" className="flex flex-wrap justify-center">

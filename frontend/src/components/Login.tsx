@@ -36,6 +36,10 @@ export const Login: React.FC<FormProps> = ({ setUser, setView }) => {
 
   return (
     <>
+      <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        Login
+        <div className="text-gray-500 text-lg font-normal">Start playing</div>
+      </div>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto m-20">
         <input
           value={userInput}
