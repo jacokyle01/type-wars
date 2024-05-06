@@ -32,8 +32,8 @@ export const Leaderboard = () => {
       </div>
 
       <div id="parameter-wrap" className="flex items-center	justify-center space-x-40 justify-items-center">
-        <div id="word-wrap " className="flex flex-col justify-center items-center my-auto">
-          <div className="mt-10 text-center text-1xl leading-9 tracking-tight text-gray-900">Words</div>
+        <div id="word-wrap " className="flex flex-col justify-center items-center">
+          {/* <div className="mt-10 text-center text-1xl leading-9 tracking-tight text-gray-900">Words</div> */}
           <div id="select-wrap" className="flex flex-wrap justify-center">
             {[25, 50, 100, 150, 200].map((option, index) => (
               <button
@@ -48,8 +48,8 @@ export const Leaderboard = () => {
             ))}
           </div>
         </div>
-        <div>
-          <label htmlFor="limit">Limit:</label>
+        <div className='flex items-center'>
+          {/* <label htmlFor="limit">Limit:</label> */}
           <input
             type="range"
             id="limit"
