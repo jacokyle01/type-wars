@@ -15,7 +15,6 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
   const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
   const [wordsTyped, setWordsTyped] = useState(0);
-  const [lastWpm, setLastWpm] = useState(0);
   const [targetString, setTargetString] = useState('');
   useEffect(() => {
     setTargetString(wordGen(wordLimit));
@@ -32,15 +31,9 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
   //this is the list of words we are trying to type
   //indexes up to what position we have succesfully entered values
   const [completionIndex, setCompletionIndex] = useState(0);
-  // const [lastPressedKey, setLastPressedKey] = useState('');
 
   const handleStart = () => {
     setMode('inProgress'); //updates view
-    //TODO make util method that does this
-    // setTargetString('Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, optio!');
-    // setStarted(true);
-    // setEnded(false);
-    // setInput(quote.quote);
     setTimer();
   };
 
@@ -78,7 +71,6 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
     if (mode != 'inProgress') {
       handleStart();
     }
-    // setMode('inProgress');
     e.preventDefault();
     const { key } = e;
     if (key === targetString.charAt(completionIndex)) {
@@ -87,7 +79,6 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
       }
       setTypingResult('correct');
       setCompletionIndex(completionIndex + 1);
-      // setLastPressedKey(key);
       if (completionIndex + 1 === targetString.length) {
         handleEnd();
       }
@@ -98,22 +89,30 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
 
   const renderWordCountSelect = () => {
     return (
-      <>
-        <div className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Choose your word count
+      <div id='main-wrap' className='text-center'>
+        <div className="mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-gray-900">
+          Play
+          <div className="text-gray-500 text-lg font-normal py-2">Complete a typing test</div>
         </div>
-        <div id="select-wrap" className="flex flex-wrap justify-center">
-          {[25, 50, 100, 150, 200].map((option, index) => (
-            <button
-              key={index}
-              className={`m-2 p-3 rounded ${wordLimit === option ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-              onClick={() => setWordLimit(option)}
-            >
-              {option}
-            </button>
-          ))}
+        <div id="word-count-wrap" className="inline-block rounded-md ring-2 ring-gray-100 mx-auto my-5 px-3 py-2">
+          <div className="text-center text-lg text-gray-900">
+            Choose your word count
+          </div>
+          <div id="select-wrap" className="flex flex-wrap justify-center">
+            {[25, 50, 100, 150, 200].map((option, index) => (
+              <button
+                key={index}
+                className={`m-2 p-3 rounded ${
+                  wordLimit === option ? 'bg-blue-600 text-white' : 'bg-gray-200'
+                }`}
+                onClick={() => setWordLimit(option)}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
         </div>
-      </>
+      </div>
     );
   };
 
@@ -121,7 +120,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
     return (
       <div
         id="test-wrap"
-        className="h-1/5 w-1/2 mx-auto px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
+        className="h-1/5 w-1/2 mx-auto px-4 py-2 rounded-md ring-2 ring-gray-100 rounded-md shadow-sm focus:outline-none focus:border-blue-600"
         tabIndex={-1}
         onKeyDown={handleKeyDown}
         ref={inputRef}
@@ -139,7 +138,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
       {mode == 'notStarted' ? (
         <button
           onClick={() => handleStart()}
-          className="mx-auto my-3 w-32 flex w-full justify-center rounded-md bg-blue-600
+          className="mx-auto my-3 w-32 flex justify-center rounded-md bg-blue-600
           px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500
            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         >
@@ -147,25 +146,16 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
         </button>
       ) : (
         <>
-          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md 
-          bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
-            Time spent: {spentTime}
-          </div>
-          <div className="mx-auto my-3 w-32 flex w-full justify-center rounded-md 
-          bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
-            WPM: {getWpm()}
+          <div className="flex justify-center">
+            <div className="mx-3 my-3 w-32 flex justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
+              Time spent: {spentTime}
+            </div>
+            <div className="mx-3 my-3 w-32 flex justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm">
+              WPM: {getWpm()}
+            </div>
           </div>
         </>
       )}
-      {/* <button
-        onClick={() => handleStart()}
-        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 
-        text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 
-        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-        focus-visible:outline-indigo-600"
-      >
-        Start playing
-      </button> */}
       {renderTest()}
     </>
   );
