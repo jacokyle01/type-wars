@@ -15,7 +15,6 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
   const [wordLimit, setWordLimit] = useState(25);
   const [typingResult, setTypingResult] = useState<TypingResult>('null');
   const [wordsTyped, setWordsTyped] = useState(0);
-  const [lastWpm, setLastWpm] = useState(0);
   const [targetString, setTargetString] = useState('');
   useEffect(() => {
     setTargetString(wordGen(wordLimit));
@@ -32,15 +31,9 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
   //this is the list of words we are trying to type
   //indexes up to what position we have succesfully entered values
   const [completionIndex, setCompletionIndex] = useState(0);
-  // const [lastPressedKey, setLastPressedKey] = useState('');
 
   const handleStart = () => {
     setMode('inProgress'); //updates view
-    //TODO make util method that does this
-    // setTargetString('Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, optio!');
-    // setStarted(true);
-    // setEnded(false);
-    // setInput(quote.quote);
     setTimer();
   };
 
@@ -78,7 +71,6 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
     if (mode != 'inProgress') {
       handleStart();
     }
-    // setMode('inProgress');
     e.preventDefault();
     const { key } = e;
     if (key === targetString.charAt(completionIndex)) {
@@ -87,7 +79,6 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
       }
       setTypingResult('correct');
       setCompletionIndex(completionIndex + 1);
-      // setLastPressedKey(key);
       if (completionIndex + 1 === targetString.length) {
         handleEnd();
       }
@@ -163,52 +154,7 @@ export const Play: React.FC<PlayProps> = ({ user }) => {
           </div>
         </>
       )}
-      {/* <button
-        onClick={() => handleStart()}
-        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
-        Start playing
-      </button> */}
       {renderTest()}
     </>
-
-    // <>
-    //   <h1>Hello {user.name}</h1>
-    //   {(() => {
-    //     switch (mode) {
-    //       case 'notStarted':
-    //         return (
-    //           <>
-    //             {renderWordCountSelect()}
-    //             <button
-    //               onClick={() => handleStart()}
-    //               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    //             >
-    //               Start playing
-    //             </button>
-    //             {renderTest()}
-    //             <button onClick={() => setView('leaderboard')}>See leaderboard</button>
-    //           </>
-    //         );
-    //       case 'inProgress': //could be a separate component
-    //         return (
-    //           <>
-    //             <h1>Time spent: {spentTime}</h1>
-    //             <h1>Your wpm: {getWpm()}</h1>
-    //             {renderTest()}
-    //             <h3>Last pressed key: {lastPressedKey}</h3>
-    //           </>
-    //         );
-
-    //       case 'finished':
-    //         return (
-    //           <>
-    //             <h1>Your wpm: {lastWpm}</h1>
-    //             <button onClick={() => handleStart()}>Play again?</button>
-    //           </>
-    //         );
-    //     }
-    //   })()}
-    // </>
   );
 };
